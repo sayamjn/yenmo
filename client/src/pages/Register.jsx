@@ -63,7 +63,7 @@ const Register = () => {
               name="name"
               value={name}
               onChange={onChange}
-              className="form-input"
+              className="form-input p-3 w-full"
               placeholder="John Doe"
               required
             />
@@ -79,7 +79,7 @@ const Register = () => {
               name="email"
               value={email}
               onChange={onChange}
-              className="form-input"
+              className="form-input p-3 w-full"
               placeholder="yourname@example.com"
               required
             />
@@ -95,7 +95,7 @@ const Register = () => {
               name="password"
               value={password}
               onChange={onChange}
-              className="form-input"
+              className="form-input p-3 w-full"
               placeholder="••••••••"
               minLength="6"
               required
@@ -113,7 +113,7 @@ const Register = () => {
               name="confirmPassword"
               value={confirmPassword}
               onChange={onChange}
-              className="form-input"
+              className="form-input p-3 w-full"
               placeholder="••••••••"
               minLength="6"
               required
@@ -134,7 +134,7 @@ const Register = () => {
                 Creating Account...
               </span>
             ) : (
-              'Create Account'
+              <h2 className='border p-3'>'Create Account'</h2>
             )}
           </button>
         </form>

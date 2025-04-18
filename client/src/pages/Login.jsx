@@ -55,7 +55,7 @@ const Login = () => {
               name="email"
               value={email}
               onChange={onChange}
-              className="form-input"
+              className="form-input p-3 w-full"
               placeholder="yourname@example.com"
               required
             />
@@ -72,7 +72,7 @@ const Login = () => {
               name="password"
               value={password}
               onChange={onChange}
-              className="form-input"
+              className="form-input w-full p-3"
               placeholder="••••••••"
               required
             />
@@ -91,7 +91,7 @@ const Login = () => {
                 Signing in...
               </span>
             ) : (
-              'Sign In'
+              <h1 className='p-3 border'>'Sign In'</h1>
             )}
           </button>
         </form>
