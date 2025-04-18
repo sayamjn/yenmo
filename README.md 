@@ -1,0 +1,122 @@
+# Loan Eligibility Checker App
+
+A web application that allows users to check their loan eligibility based on their mutual fund holdings.
+
+## Features
+
+- **User Authentication**: Register and login functionality with JWT authentication
+- **Mutual Fund Holdings**: Fetch mutual fund holdings using PAN number
+- **Loan Eligibility Calculation**: Calculate loan eligibility based on mutual fund value
+- **History Tracking**: Track and view history of past eligibility checks
+
+## Tech Stack
+
+### Frontend
+- React.js with Vite
+- React Router for navigation
+- Context API for state management
+- Tailwind CSS for styling
+- Axios for API requests
+- React Toastify for notifications
+
+### Backend
+- Node.js with Express.js
+- MongoDB with Mongoose ORM
+- JWT for authentication
+- bcrypt for password hashing
+- Jest for unit testing
+
+## Project Structure
+
+```
+loan-eligibility-checker/
+├── client/             # React frontend
+│   ├── public/         # Static files
+│   └── src/            # Source files
+│       ├── components/ # Reusable components
+│       ├── context/    # Context providers
+│       ├── pages/      # Page components
+│       └── services/   # API services
+├── server/             # Node.js backend
+│   ├── controllers/    # Route controllers
+│   ├── middleware/     # Custom middleware
+│   ├── models/         # Database models
+│   ├── routes/         # API routes
+└── README.md           # Project documentation
+```
+
+## Setup Instructions
+
+### Prerequisites
+- Node.js (v14 or higher)
+- MongoDB
+
+### Installation
+
+1. Clone the repository
+   ```
+   git clone https://github.com/sayamjn/yenmo.git
+   cd yenmo
+   ```
+
+2. Install server dependencies
+   ```
+   cd server
+   npm install
+   ```
+
+3. Install client dependencies
+   ```
+   cd ../client
+   npm install
+   ```
+
+4. Create a `.env` file in the server directory with the following variables:
+   ```
+   PORT=5000
+   MONGO_URI=mongodb://localhost:27017/loan-eligibility-app
+   JWT_SECRET=your_jwt_secret_key_here
+   JWT_EXPIRE=30d
+   ```
+
+### Running the Application
+
+1. Start the server (from the server directory)
+   ```
+   npm run dev
+   ```
+
+2. Start the client (from the client directory)
+   ```
+   npm run dev
+   ```
+
+3. Access the application at `http://localhost:3000`
+
+### Running Tests
+
+Run backend tests (from the server directory)
+```
+npm test
+```
+
+## API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - Register a new user
+- `POST /api/auth/login` - User login
+- `GET /api/auth/me` - Get current user profile
+
+### Mutual Funds
+- `GET /api/mf/holdings?pan=ABCDE1234F` - Get mutual fund holdings by PAN
+
+### Loan Eligibility
+- `POST /api/eligibility/calculate` - Calculate loan eligibility
+- `GET /api/eligibility/history` - Get eligibility check history
+
+## Security Features
+
+- Password hashing using bcrypt
+- JWT authentication for protected routes
+- Input validation for PAN numbers and other critical fields
+- Protected API routes accessible only to authenticated users

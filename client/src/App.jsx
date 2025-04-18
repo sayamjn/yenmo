@@ -11,7 +11,7 @@ import EligibilityCheck from './pages/EligibilityCheck';
 import EligibilityHistory from './pages/EligibilityHistory';
 import NotFound from './pages/NotFound';
 import PrivateRoute from './components/PrivateRoute';
-import './index.css';
+import './app.css';
 
 function App() {
   return (
