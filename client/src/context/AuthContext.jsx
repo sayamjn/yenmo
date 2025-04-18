@@ -12,12 +12,11 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Configure axios defaults
-  axios.defaults.baseURL = 'http://localhost:5000';
-  axios.defaults.withCredentials = true; // Important for cookies/credentials
+  // Set axios defaults
+  axios.defaults.baseURL = 'http://localhost:8080';
 
+  // Set token in axios headers
   useEffect(() => {
-    // Set auth header if token exists
     if (token) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     } else {
@@ -25,26 +24,30 @@ export const AuthProvider = ({ children }) => {
     }
   }, [token]);
 
+  // Load user if token exists
   useEffect(() => {
     const loadUser = async () => {
       if (token) {
         try {
+          // Check if token is expired
           const decoded = jwtDecode(token);
           const currentTime = Date.now() / 1000;
           
           if (decoded.exp < currentTime) {
+            // Token expired
             localStorage.removeItem('token');
             setToken(null);
             setUser(null);
             setIsAuthenticated(false);
             navigate('/login');
           } else {
+            // Token valid, load user
             const res = await axios.get('/api/auth/me');
             setUser(res.data.data);
             setIsAuthenticated(true);
           }
         } catch (err) {
-          console.error("Auth error:", err);
+            console.log(err);
           localStorage.removeItem('token');
           setToken(null);
           setUser(null);
@@ -57,6 +60,7 @@ export const AuthProvider = ({ children }) => {
     loadUser();
   }, [token, navigate]);
 
+  // Register user
   const register = async (userData) => {
     try {
       const res = await axios.post('/api/auth/register', userData);
@@ -67,11 +71,11 @@ export const AuthProvider = ({ children }) => {
         return true;
       }
     } catch (err) {
-      console.error("Registration error:", err);
       throw err.response?.data?.message || 'Registration failed';
     }
   };
 
+  // Login user
   const login = async (userData) => {
     try {
       const res = await axios.post('/api/auth/login', userData);
@@ -82,11 +86,11 @@ export const AuthProvider = ({ children }) => {
         return true;
       }
     } catch (err) {
-      console.error("Login error:", err);
       throw err.response?.data?.message || 'Login failed';
     }
   };
 
+  // Logout user
   const logout = () => {
     localStorage.removeItem('token');
     setToken(null);
